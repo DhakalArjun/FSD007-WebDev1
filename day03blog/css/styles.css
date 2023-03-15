@@ -1,0 +1,8 @@
+.form-as-container {
+  max-width: 25rem;
+}
+
+.label-wrapper {
+  width: 10rem;
+  text-align: left;
+}
