@@ -79,7 +79,7 @@
       // echo "One record added\n";    //Here\n doesnot add new line while instead it will add just a white space as you're outputting HTML, and in HTML, "\n" is treated as whitespace
       // echo "This is a $taskDificulty task $task and is " . (!$isDone?"not":"") . " done";
 
-      echo "One record added," . "This is a $taskDificulty task $task and is " . (!$isDone?"not":"") . " done";  
+      echo "One record added, <br>"  . "This is a $taskDificulty task $task and is " . (!$isDone?"not":"") . " done";  
       
     }
   }
