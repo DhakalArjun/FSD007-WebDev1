@@ -1,10 +1,11 @@
 <?php
 // Note: above <?php should be at first row and first column otherwise it will create expected white spaces
+session_start();
 
 $dbhost="localhost";
-$dbUser="day01";
-$dbPassword="123uvehY(2GwX5]4";
-$dbName="day01";
+$dbUser="day03blog";
+$dbPassword="fgkkas_Hg0)cpvy0";
+$dbName="day03blog";
 $con = @mysqli_connect($dbhost, $dbUser, $dbPassword, $dbName);
 
 if(!$con){

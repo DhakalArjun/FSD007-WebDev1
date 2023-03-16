@@ -6,3 +6,10 @@
   width: 10rem;
   text-align: left;
 }
+
+.error-li {
+  width: 30rem;
+}
+.error-tag {
+  width: 31rem;
+}

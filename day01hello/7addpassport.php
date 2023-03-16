@@ -57,9 +57,7 @@
       $errors[]='Sorry, file already exists.';      
     }
 
-    if(!$errors){    
-      move_uploaded_file($_FILES["ImageToUpload"]["tmp_name"],"uploads/".$targetFileName);
-
+    if(!$errors){ 
       //full path of the file uploaded      
       //$fullPath = getcwd()."\uploads\\".$targetFileName;   -> this will create the full path  
       $filePath = "/uploads/".$targetFileName;
@@ -76,6 +74,7 @@
       if(!$queryResult){
         die("Fatal error: failed to execute SQL query: " . mysqli_error($con));
       }
+      move_uploaded_file($_FILES["ImageToUpload"]["tmp_name"],"uploads/".$targetFileName);
       displaySuccessMessage($passportNo, $fileFormat); 
 
     }
