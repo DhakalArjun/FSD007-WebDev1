@@ -45,3 +45,29 @@
   border: solid 1px rgb(175, 243, 175);
   border-radius: 10px;
 }
+
+.article-label {
+  width: 5rem;
+  text-align: left;
+}
+
+#IdTitle,
+#IdContent {
+  width: 500px;
+}
+
+#IdContent {
+  height: 500px;
+}
+
+.create-button {
+  position: relative;
+  left: 4rem;
+  width: 10rem;
+}
+.title-form-header {
+  margin: 1rem auto;
+  width: 30rem;
+  position: relative;
+  left: 4rem;
+}

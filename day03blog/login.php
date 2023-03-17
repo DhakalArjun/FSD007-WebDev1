@@ -23,7 +23,7 @@ if(isset($_POST['login'])){
 
     unset($userDetails['password']); //for security reason erase password element from associative array of user details
     $_SESSION['blogUser'] = $userDetails; // declaring a session variable to store user detail except password
-    echo '<div class="success-div"><h4 class="success-para">Login Successful</h4><br><a href="index.php" class="continue-link btn btn-outline-primary">Click here to continue</a></div>';    
+    echo '<div class="success-div"><h4 class="success-para">Login Successful</h4><br><a href="articleadd.php" class="continue-link btn btn-outline-primary">Click here to continue</a></div>';    
   }
 }else{
   printLoginForm();
@@ -49,7 +49,7 @@ if(isset($_POST['login'])){
   </head>
   <body>
   <?php
-    function printLoginForm($user="", $email="")
+    function printLoginForm()
     { $loginForm = <<< LOGIN
       <h3 class="text-center mt-5 mb-5">User login</h3>
         <form class="container text-center border border-dark form-as-container-login" action="login.php" method="post" enctype="multipart/form-data">
@@ -59,7 +59,7 @@ if(isset($_POST['login'])){
               <label for="IdUserName" class="col-form-label">Username</label>
             </div>
             <div class="col-auto">
-              <input type="text" name="userName" id="IdUserName" class="form-control">
+              <input type="text" name="userName" id="IdUserName" class="form-control" required>
             </div>
           </div>
           <!-- password -->
@@ -68,12 +68,12 @@ if(isset($_POST['login'])){
               <label for="IdPassword" class="col-form-label">Password</label>
             </div>
             <div class="col-auto">
-              <input type="password" name="password" id="IdPassword" class="form-control" aria-describedby="passwordHelpInline">
+              <input type="password" name="password" id="IdPassword" class="form-control" aria-describedby="passwordHelpInline" required>
             </div>
           </div>
           <!-- button and anchor tag to Register--> 
               <input type="submit" name="login" value="Login" class="btn btn-outline-primary mt-2 mb-2">                      
-              <p><a href="#">No account? Register here</a></p>          
+              <p><a href="register.php">No account? Register here</a></p>          
         </form>
       LOGIN;
       echo $loginForm;
