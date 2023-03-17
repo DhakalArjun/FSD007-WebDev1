@@ -98,13 +98,23 @@ else
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Registration</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script>$(document).ready(function(){
+      // alert("It works"); // for testing jQuery is added properly
+      $('input[name=desiredUserName]').keyup(function(){
+        var userInput = $(this).val(); // this is eqivalent to $('input[name=desiredUserName]').val(); -- here .val() means .value in jQuery
+        $('#usernameTaken').load('isusernametaken.php?username=' + userInput)        
+      });  
+    });
+      
+    </script>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
       crossorigin="anonymous"
     />
-    <link href="css/styles.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/styles.css" />   
   </head>
   <body id="register-page">
     <?php
@@ -115,16 +125,17 @@ else
       <h3 class="text-center mt-3 mb-3">New User registration</h3>
         <form class="container text-center border border-dark form-as-container" action="register.php" method="post" enctype="multipart/form-data">
           <!-- username -->
-          <div class="row g-3 mt-2 mb-2 d-flex justify-content-center">
+          <div class="row g-3 mt-2 mb-2 d-flex justify-content-between">
             <div class="col-auto label-wrapper">
               <label for="IdDesiredUserName" class="col-form-label">Desired username</label>
             </div>
             <div class="col-auto ">
               <input type="text" name="desiredUserName" id="IdDesiredUserName" class="form-control" value="$user" required>
+              <span id="usernameTaken" class="inline-form-text"></span>
             </div>            
           </div>
           <!-- username -->
-          <div class="row g-3 mt-2 mb-2 d-flex justify-content-center">
+          <div class="row g-3 mt-2 mb-2 d-flex justify-content-between">
             <div class="col-auto label-wrapper">
               <label for="Idemail" class="col-form-label">Your email</label>
             </div>
@@ -133,7 +144,7 @@ else
             </div>
           </div>
           <!-- password -->
-          <div class="row g-3 mt-2 mb-2  d-flex justify-content-center">
+          <div class="row g-3 mt-2 mb-2  d-flex justify-content-between">
             <div class="col-auto label-wrapper">
               <label for="IdPassword" class="col-form-label">Password</label>
             </div>
@@ -142,7 +153,7 @@ else
             </div>
           </div>
           <!-- password repeat -->
-          <div class="row g-3 mt-2 mb-2  d-flex justify-content-center">
+          <div class="row g-3 mt-2 mb-2  d-flex justify-content-between">
             <div class="col-auto label-wrapper">
               <label for="IdPasswordRepeat" class="col-form-label">Password (repeat)</label>
             </div>
@@ -151,7 +162,7 @@ else
             </div>
           </div>
           <!-- button and anchor tag to Register--> 
-              <input type="submit" name="register" value="Register !" class="btn btn-outline-dark mt-2 mb-2" >  
+              <input type="submit" name="register" value="Register !" class="btn btn-outline-primary mt-2 mb-2" >  
         </form> 
         <div class="row g-3 mt-2 mb-2 justify-content-center">
             <div class="col-auto ">
@@ -171,7 +182,7 @@ else
         <div class="row g-3 mt-2 mb-2 justify-content-center">
         <form action="login.php" class="mb-4 col-auto">           
             <h4 class="success-message">You have successfully registered</h4> 
-            <input type="submit" name="goToLogin" value="Go To Login Page" class="btn btn-primary mt-3">
+            <input type="submit" name="goToLogin" value="OK" class="btn btn-outline-primary mt-3">
           </form>             
         </div>        
       MSG;
@@ -196,6 +207,6 @@ else
       echo $errorMsg;               
     }
     ?>
-    <script hrf=""></script>
+    <script scr=""></script>
   </body>
 </html>

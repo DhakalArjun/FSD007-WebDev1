@@ -1,5 +1,8 @@
 .form-as-container {
-  max-width: 25rem;
+  width: 30rem;
+}
+.form-as-container-login {
+  width: 25rem;
 }
 
 .label-wrapper {
@@ -12,4 +15,33 @@
 }
 .error-tag {
   width: 31rem;
+}
+.inline-form-text {
+  color: rgb(197, 14, 14);
+}
+
+.error-msg {
+  margin: 2rem auto;
+  width: 25rem;
+  height: 3rem;
+  padding: 0.75rem;
+  font-size: larger;
+  text-align: center;
+  justify-content: center;
+  background-color: #ffacac;
+  border: solid 1px #ffacac;
+  border-radius: 10px;
+}
+
+.success-div {
+  margin: 5rem auto;
+  padding: 1rem;
+  width: 25rem;
+  height: 9rem;
+  font-size: larger;
+  text-align: center;
+  justify-content: center;
+  background-color: rgb(175, 243, 175);
+  border: solid 1px rgb(175, 243, 175);
+  border-radius: 10px;
 }
