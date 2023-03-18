@@ -1,4 +1,156 @@
-.form-as-container {
+/************************************************ 
+* Developed by: Arjun Dhakal
+*************************************************/
+/* ================================== Variables  */
+:root {
+  /* ------------------------------- font colors */
+  --colHeavyFont: #222831;
+  --colMediumFont: #828991;
+  --colLightFont: white;
+  --colHoverFont: rgb(124, 90, 4);
+  /* -------------------------- background colors */
+  --colBodyBG: #e3fdfd;
+  --colFormBG: white;
+  --colButtonBG: #0d6efd;
+  --colSuccessMsgBG: #a8e6cf;
+  --colErrorMsg: #ffcef3;
+  /* ------------------------------- font familys */
+  --font1: "Montserrat", sans-serif;
+  --font2: "Roboto", sans-serif;
+}
+/* ==== General/global attributes and typography*/
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--colBodyBG);
+  font-family: var(--font1);
+  line-height: 1.5;
+  color: var(--colHeavyFont);
+}
+h1 {
+  font-size: 2.5rem;
+  font-weight: 600;
+}
+h2 {
+  font-size: 2rem;
+  font-weight: 600;
+}
+h3 {
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+h4 {
+  font-size: 1.2rem;
+  font-weight: 400;
+}
+/* ====================================== others */
+.containterCentered {
+  margin: 0 auto;
+  padding: 0px;
+  max-width: 1000px;
+}
+.txtLeft {
+  text-align: left;
+}
+.txtRight {
+  text-align: right;
+}
+.txtCenter {
+  text-align: center;
+}
+.rowFlex {
+  display: flex;
+  justify-content: space-between;
+  margin: 0.5rem auto;
+}
+.formLabel {
+  line-height: 2.5;
+  width: 6rem;
+  margin: 0.2rem;
+  text-align: left;
+}
+
+input[type="text"],
+textarea {
+  line-height: 2.5;
+  border-radius: 3px;
+  outline: none;
+  padding: 0.2rem;
+  margin: 0.2rem;
+  border: 1px solid #dddddd;
+  font-family: var(--font1);
+}
+
+input[type="text"]:focus,
+textarea:focus {
+  box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+  border: 1px solid rgba(81, 203, 238, 1);
+}
+
+.btnDefault {
+  margin: 0.5rem auto;
+  padding: 0.5rem;
+  font-size: 1.2rem;
+  min-width: 8rem;
+  height: 2.5rem;
+  color: var(--colButtonBG);
+  background-color: var(--colLightFont);
+  border: solid 1px var(--colButtonBG);
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.btnDefault:hover {
+  background: var(--colButtonBG);
+  color: var(--colLightFont);
+}
+.formAsContainter {
+  margin: 0 auto;
+  padding: 1rem;
+  background-color: var(--colFormBG);
+  border: solid 1px var(--colFormBG);
+  border-radius: 5px;
+  text-align: center;
+}
+
+.errorMsg {
+  margin: 1rem auto;
+  padding: 0 1rem;
+  background-color: var(--colErrorMsg);
+  border: solid 1px var(--colErrorMsg);
+  border-radius: 5px;
+}
+.successMsg {
+  width: 600px;
+  height: 135px;
+  margin: 3rem auto;
+  padding: 0 1rem;
+  background-color: var(--colSuccessMsgBG);
+  border: solid 1px var(--colSuccessMsgBG);
+  border-radius: 5px;
+}
+
+/* articleadd.php */
+.formAddArticle {
+  width: 600px;
+}
+#IdTitle,
+#IdContent {
+  width: 600px;
+}
+#IdContent {
+  height: 400px;
+}
+.moveRight-3 {
+  position: relative;
+  left: 3rem;
+}
+.errorAddArticle {
+  width: 600px;
+}
+
+/* -------------------- Version 1 -------------- */
+/* .form-as-container {
   width: 30rem;
 }
 .form-as-container-login {
@@ -20,45 +172,14 @@
   color: rgb(197, 14, 14);
 }
 
-.error-msg {
-  margin: 2rem auto;
-  width: 25rem;
-  height: 3rem;
-  padding: 0.75rem;
-  font-size: larger;
-  text-align: center;
-  justify-content: center;
-  background-color: #ffacac;
-  border: solid 1px #ffacac;
-  border-radius: 10px;
-}
 
-.success-div {
-  margin: 5rem auto;
-  padding: 1rem;
-  width: 25rem;
-  height: 9rem;
-  font-size: larger;
-  text-align: center;
-  justify-content: center;
-  background-color: rgb(175, 243, 175);
-  border: solid 1px rgb(175, 243, 175);
-  border-radius: 10px;
-}
 
 .article-label {
   width: 5rem;
   text-align: left;
 }
 
-#IdTitle,
-#IdContent {
-  width: 500px;
-}
 
-#IdContent {
-  height: 500px;
-}
 
 .create-button {
   position: relative;
@@ -71,3 +192,7 @@
   position: relative;
   left: 4rem;
 }
+
+.error-addarticle {
+  height: 5rem;
+} */

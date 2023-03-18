@@ -1,88 +1,98 @@
-<?php
-require_once("db.php");
-
-//print_r($_SESSION['blogUser']);
-$blogUser =$_SESSION['blogUser']['userName'];
-
-printCreateNewArticleForm($blogUser);
-
-
-?>
-
-
-
-
-
-
-
-
-
-
+<?php require_once("db.php"); ?>;
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Article Add</title>
+  <!-- fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-      crossorigin="anonymous"
-    />
-    <link rel="stylesheet" href="css/styles.css" />  
+    href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,900;1,400&family=Roboto:wght@400;900&display=swap"
+    rel="stylesheet" />
+  <!-- css -->
+  <link rel="stylesheet" href="css/styles.css?<?php echo time();?>" />
 </head>
+
 <body>
+  <div class="containterCentered articleAddBody">
+    <?php    
+     if (!isset($_SESSION['blogUser'])) {
+      die("Error: only authenticated users may post an article");
+    }      
 
-
-<?php
-    function printCreateNewArticleForm($blogUser)
+    function printCreateNewArticleForm($blogUser="",$title="",$content="")
     { $loginForm = <<< LOGIN
-
-      <h6 class="text-end mt-2 px-5 py-2 ">You are logged in as $blogUser. &nbsp;&nbsp;  <a href="">Logout</a></h6>
-      <h3 class="text-center mt-1 title-form-header">Create new article</h3>
-
-
-        <form class="container-fluid text-center form-as-container-article" action="login.php" method="post" enctype="multipart/form-data">
-          <!-- Title -->
-          <div class="row g-3 mt-2 mb-2 d-flex justify-content-center">
-            <div class="col-auto">
-              <label for="IdTitle" class="article-label">Title</label>
-            </div>
-            <div class="col-auto">
-              <input type="text" name="title" id="IdTitle" class="form-control border border-dark" placeholder="This is title....">
-            </div>
-          </div>
-          <!-- content -->
-          <div class="row g-3 mt-2 mb-2  d-flex justify-content-center">
-            <div class="col-auto">
-              <label for="Idcontent" class="article-label">Content</label>
-            </div>
-            <div class="col-auto">
-            <textarea name="content" id="IdContent" class="form-control border border-dark" placeholder="This is content...." requried></textarea>
-            </div>
-          </div>
-          <!-- button and anchor tag to Register--> 
-              <input type="submit" name="create" value="create" class="btn btn-outline-primary mt-2 mb-2 create-button">                
-                       
-        </form>
+      <h4 class="txtRight">You are logged in as $blogUser. &nbsp;&nbsp;  <a href="">Logout</a></h4>
+      <h2 class="txtCenter">Create new article</h2>
+      <form class="formAsContainter formAddArticle" action="" method="post" enctype="multipart/form-data">
+        <!-- Title -->         
+        <div class="rowFlex">
+          <label for="IdTitle" class="formLabel">Title</label>
+          <input type="text" name="title" id="IdTitle" class="form-control border border-dark" placeholder="This is title...." value="$title">
+        </div>          
+        <!-- content -->
+        <div class="rowFlex">            
+          <label for="Idcontent" class="formLabel">Content</label>  
+          <textarea name="content" id="IdContent" class="form-control border border-dark" placeholder="This is content...." requried>$content</textarea>            
+        </div>
+        <!-- button and anchor tag to Register--> 
+        <input type="submit" name="create" value="Create" class="btnDefault moveRight-3"> 
+      </form>
       LOGIN;
       echo $loginForm;
     }
-  ?> 
 
+    //print_r($_SESSION['blogUser']);
+    $blogUser =$_SESSION['blogUser']['userName']; 
+    if(isset($_POST['create'])){   //if create button is clicked
+      $title=$_POST['title'];
+      $content=$_POST['content'];
+      $errors = [];
+    
+      if(strlen($title)<2|| strlen($title)>100){
+        $errors[]= "Title must be 2-100 characters long";
+        // don't erase title although it doesn't valid as per above
+      }
+      if(strlen($content)<2|| strlen($content)>10000){
+        $errors[]= "Content must be 2-10000 characters long";
+        // don't erase content although it doesn't valid as per above
+      }
+      if(!$errors){
+        $userId = $_SESSION['blogUser']['id'];
+        $sqlStr = sprintf("INSERT INTO articles (authorId, title, body) VALUES(%d, '%s', '%s')",
+        mysqli_real_escape_string($con, $userId),
+        mysqli_real_escape_string($con, $title),
+        mysqli_real_escape_string($con, $content));    
+        //echo $sqlStr;
+        $result = mysqli_query($con, $sqlStr);
 
-
-
-
-
-
-
-
-
-
-  
+        if(!$result){
+          die("Fatal error: failed to execute SQL query: " . mysqli_error($con));
+        }        
+        $articleId = mysqli_insert_id($con);
+        echo '<div class=successMsg>
+                <h4>Article added successfully</h4>               
+                <a href="article.php?id='.$articleId.'" class="btnDefault">Click here to view it</a>
+              </div>';
+      } else{
+        printCreateNewArticleForm($blogUser,$title,$content);
+        echo '<div class="errorMsg errorAddArticle">
+                <h4>Error(s) Occured:</h4>                
+                foreach ($errors as $error){
+                  echo "<li>$error</li>";
+                }            
+              </div>';
+      }
+    }else{
+    printCreateNewArticleForm($blogUser);
+    }
+   ?>
+  </div>
 </body>
+
 </html>
