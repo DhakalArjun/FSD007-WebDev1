@@ -1,20 +1,4 @@
-<?php
-require_once("db.php");
-
-
-//print_r($_SESSION['blogUser']);
-$blogUser =$_SESSION['blogUser']['userName'];
-
-if(isset($_POST['create'])){
-  $title=$_POST['title'];
-  $body=$_POST['content'];
-  $errors = [];
-
-
-}else{
-  printArticleForm();
-}
-?>
+<?php require_once("db.php"); ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -24,42 +8,74 @@ if(isset($_POST['create'])){
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Article Add</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
-  <link rel="stylesheet" href="css/styles.css" />
+  <!-- fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,900;1,400&family=Roboto:wght@400;900&display=swap"
+    rel="stylesheet" />
+  <!-- css -->
+  <link rel="stylesheet" href="css/styles.css?<?php echo time();?>" />
 </head>
 
 <body>
+  <div class="containterCentered">
+    <?php        
+     if (!isset($_SESSION['blogUser'])) {
+      die("Error: only authenticated users may post an article");
+      }
 
-
-  <?php
-    function printArticleForm($articleId="",$userId="", $creationTime="",$title="",$content="")
-    { $articleForm = <<< LOGIN
-
-      <h6 class="text-end mt-2 px-5 py-2 ">You are logged in as $userId. &nbsp;&nbsp;  <a href="">Logout</a></h6>
-      <h3 class="text-center mt-1 title-form-header">$articleId</h3>
-      <p class="text-center mt-1 title-form-header">$title</p>
-      <div class="text-center mt-1 title-form-header">$content</div>
-
-        <form class="container-fluid text-center form-as-container-article" action="" method="post" enctype="multipart/form-data">
-          
-          <!-- Add comment -->
-          <div class="row g-3 mt-2 mb-2  d-flex justify-content-center">
-            <div class="col-auto">
-              <label for="IdAddComment" class="article-label">Content</label> <br>
-              <!-- button and anchor tag to Register--> 
-              <input type="submit" name="create" value="Add comment" class="btn btn-outline-primary mt-2 mb-2 create-button">   
-            </div>
-            <div class="col-auto">
-            <textarea name="content" id="IdAddComment" class="form-control border border-dark" placeholder="This is content...." requried>$content</textarea>
-            </div>
-          </div>                 
-                       
+      function printArticleForm($content="")
+      { $addCommentForm = <<< FORMSTART
+          <form class="formAsContainter formWidth800" action="" method="post" enctype="multipart/form-data">                
+          <div class="rowFlex">
+            <div class="colFlex txtLeft">
+              <label for="IdAddComment" class="">My Comment:</label>
+              <input type="submit" id="IdAddComment" name="create" value="Add Comment" class="btnDefault"> 
+            </div>  
+            <textarea name="content" id="IdCommentContent" class="" placeholder="Type your content here...." requried>$content</textarea>        
+            
+          </div>
         </form>
-      LOGIN;
-      echo $articleForm;
-    }
-  ?>
+        FORMSTART;
+        echo $addCommentForm ;
+      }
+
+      if (!isset($_GET['id'])) {
+        die("Error: missing article ID in the URL");
+      } 
+      $id = $_GET['id'];
+      $sqlStr = sprintf("SELECT a.id, a.creationTS, a.title, a.body, u.username FROM articles as a JOIN users as u ON a.authorId = u.id AND a.id=%d",
+          mysqli_real_escape_string($con, $id));
+      $result = mysqli_query($con, $sqlStr);
+      if (!$result) {
+          die("SQL Query failed: " . mysqli_error($con));
+      }
+      $article = mysqli_fetch_assoc($result);
+      if (!$article) {
+          http_response_code(404); // may work or not work, depending on whether output buffering is enabled or not
+          echo '<h2>Article not found</h2>';
+      } else {
+        $blogUser =$_SESSION['blogUser']['userName'];  
+        echo "<h4 class='txtRight'>You are logged in as $blogUser. &nbsp;&nbsp;  <a href=''>Logout</a></h4>";
+        $titleNoTags = strip_tags($article['title']);
+        $postedDate = date('M d, Y \a\t H:i:s', strtotime($article['creationTS']));
+        $author = $article['username'];
+        $content =$article['body'];
+        echo "<div class='articleSection'>         
+                <h2>$titleNoTags</h2>         
+                <p>Posted by <i>$author</i> on <i>$postedDate</i></p>
+                <div class='articleContent'>$content</div>
+              </div>";
+        // NOT recommended - use Twig (next week)
+        // echo "<script> document.title='" . htmlentities($article['title']) . "'; </script>\n";
+        printArticleForm();
+
+
+      }
+
+   ?>
+  </div>
 </body>
 
 </html>

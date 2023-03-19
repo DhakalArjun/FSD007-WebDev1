@@ -19,32 +19,31 @@
 </head>
 
 <body>
-  <div class="containterCentered articleAddBody">
+  <div class="containterCentered">
     <?php    
      if (!isset($_SESSION['blogUser'])) {
       die("Error: only authenticated users may post an article");
-    }      
-
+    } 
     function printCreateNewArticleForm($blogUser="",$title="",$content="")
-    { $loginForm = <<< LOGIN
+    { $addArticle = <<< FORMSTART
       <h4 class="txtRight">You are logged in as $blogUser. &nbsp;&nbsp;  <a href="">Logout</a></h4>
       <h2 class="txtCenter">Create new article</h2>
-      <form class="formAsContainter formAddArticle" action="" method="post" enctype="multipart/form-data">
+      <form class="formAsContainter formWidth600" action="" method="post" enctype="multipart/form-data">
         <!-- Title -->         
         <div class="rowFlex">
           <label for="IdTitle" class="formLabel">Title</label>
-          <input type="text" name="title" id="IdTitle" class="form-control border border-dark" placeholder="This is title...." value="$title">
+          <input type="text" name="title" id="IdTitle" class="form-control border border-dark" placeholder="Type title here...." value="$title">
         </div>          
         <!-- content -->
         <div class="rowFlex">            
           <label for="Idcontent" class="formLabel">Content</label>  
-          <textarea name="content" id="IdContent" class="form-control border border-dark" placeholder="This is content...." requried>$content</textarea>            
+          <textarea name="content" id="IdContent" class="" placeholder="Type your content here...." requried>$content</textarea>            
         </div>
         <!-- button and anchor tag to Register--> 
         <input type="submit" name="create" value="Create" class="btnDefault moveRight-3"> 
       </form>
-      LOGIN;
-      echo $loginForm;
+      FORMSTART;
+      echo $addArticle;
     }
 
     //print_r($_SESSION['blogUser']);
@@ -82,11 +81,11 @@
       } else{
         printCreateNewArticleForm($blogUser,$title,$content);
         echo '<div class="errorMsg errorAddArticle">
-                <h4>Error(s) Occured:</h4>                
+                <h4>Error(s) Occured:</h4>';                
                 foreach ($errors as $error){
                   echo "<li>$error</li>";
                 }            
-              </div>';
+        echo '</div>';
       }
     }else{
     printCreateNewArticleForm($blogUser);
