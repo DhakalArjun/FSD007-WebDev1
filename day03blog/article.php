@@ -69,10 +69,7 @@
         // NOT recommended - use Twig (next week)
         // echo "<script> document.title='" . htmlentities($article['title']) . "'; </script>\n";
         printArticleForm();
-
-
       }
-
    ?>
   </div>
 </body>

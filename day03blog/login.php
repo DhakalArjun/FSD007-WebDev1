@@ -56,7 +56,11 @@
     
         unset($userDetails['password']); //for security reason erase password element from associative array of user details
         $_SESSION['blogUser'] = $userDetails; // declaring a session variable to store user detail except password
-        echo '<div class="success-div"><h4 class="success-para">Login Successful</h4><br><a href="articleadd.php" class="continue-link btn btn-outline-primary">Click here to continue</a></div>';    
+        echo '<div class="successMsg">
+        <h4>You have successfully logged in !</h4>
+        <a href="articleadd.php" class="btnDefault">Post Article</a>&nbsp;&nbsp;
+        <a href="index.php" class="btnDefault">Home</a>
+        </div>';    
       }
     }else{
       printLoginForm();
