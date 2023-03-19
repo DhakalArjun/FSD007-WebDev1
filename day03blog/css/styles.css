@@ -134,8 +134,9 @@ successMsg h4 {
   margin-top: 0;
   margin-bottom: 0.25rem;
 }
+
 /* ~~~~~~~~~~~~~ articleadd.php ~~~~~~~~~~~~~ */
-.formWidth600 {
+.width600 {
   width: 600px;
 }
 #IdTitle,
@@ -163,7 +164,7 @@ successMsg h4 {
   padding: 0.5rem;
   text-align: justify;
 }
-.formWidth800 {
+.width800 {
   width: 800px;
 }
 .colFlex {
@@ -172,6 +173,31 @@ successMsg h4 {
 }
 #IdCommentContent {
   width: 600px;
+}
+/* ~~~~~~~~~~~~~ index.php ~~~~~~~~~~~~~ */
+
+.indexArticleWrapper {
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  text-align: justify;
+  background-color: var(--colFormBG);
+  border-radius: 5px;
+}
+.indexArticleHeading {
+  padding: 0;
+  margin: 0;
+}
+.indexArticleDetail {
+  padding: 0.25rem 0;
+  margin: 0;
+  color: var(--colMediumFont);
+}
+.indexArticleContent {
+  padding: 0.5rem 0;
+  margin: 0;
+  height: 2rem;
+  font-size: 0.9rem;
+  overflow: hidden;
 }
 
 /* -------------------- Version 1 -------------- */

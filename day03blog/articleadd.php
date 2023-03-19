@@ -16,6 +16,13 @@
     rel="stylesheet" />
   <!-- css -->
   <link rel="stylesheet" href="css/styles.css?<?php echo time();?>" />
+  <!-- script to insert editor on content box-->
+  <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+  <script>
+  tinymce.init({
+    selector: 'textarea[name=content]'
+  });
+  </script>
 </head>
 
 <body>
@@ -26,9 +33,9 @@
     } 
     function printCreateNewArticleForm($blogUser="",$title="",$content="")
     { $addArticle = <<< FORMSTART
-      <h4 class="txtRight">You are logged in as $blogUser. &nbsp;&nbsp;  <a href="">Logout</a></h4>
+      <h4 class="txtRight">You are logged in as $blogUser. &nbsp;  <a href="logout.php" class="btnDefault">Logout</a>&nbsp;&nbsp;<a href="index.php" class="btnDefault">Home</a></h4>
       <h2 class="txtCenter">Create new article</h2>
-      <form class="formAsContainter formWidth600" action="" method="post" enctype="multipart/form-data">
+      <form class="formAsContainter width600" action="" method="post" enctype="multipart/form-data">
         <!-- Title -->         
         <div class="rowFlex">
           <label for="IdTitle" class="formLabel">Title</label>
@@ -51,6 +58,11 @@
     if(isset($_POST['create'])){   //if create button is clicked
       $title=$_POST['title'];
       $content=$_POST['content'];
+
+      // FIXME: sanitize body - 1) only allow certain HTML tags, 2) make sure it is valid html
+      // WARNING: If you forget to sanitize the body bad things may happen such as JavaScript injection
+      $content = strip_tags($content, "<p><ul><li><em><strong><i><b><ol><h3><h4><h5><span><pre>");
+      $title = htmlentities($title);
       $errors = [];
     
       if(strlen($title)<2|| strlen($title)>100){

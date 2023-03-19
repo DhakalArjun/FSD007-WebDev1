@@ -19,7 +19,7 @@
 </head>
 
 <body>
-  <div class="containterCentered">
+  <div class="containterCentered width800">
     <?php        
      if (!isset($_SESSION['blogUser'])) {
       die("Error: only authenticated users may post an article");
@@ -27,14 +27,13 @@
 
       function printArticleForm($content="")
       { $addCommentForm = <<< FORMSTART
-          <form class="formAsContainter formWidth800" action="" method="post" enctype="multipart/form-data">                
+          <form class="formAsContainter width800" action="" method="post" enctype="multipart/form-data">                
           <div class="rowFlex">
             <div class="colFlex txtLeft">
               <label for="IdAddComment" class="">My Comment:</label>
               <input type="submit" id="IdAddComment" name="create" value="Add Comment" class="btnDefault"> 
             </div>  
-            <textarea name="content" id="IdCommentContent" class="" placeholder="Type your content here...." requried>$content</textarea>        
-            
+            <textarea name="content" id="IdCommentContent" class="" placeholder="Type your content here...." requried>$content</textarea>              
           </div>
         </form>
         FORMSTART;
@@ -57,7 +56,7 @@
           echo '<h2>Article not found</h2>';
       } else {
         $blogUser =$_SESSION['blogUser']['userName'];  
-        echo "<h4 class='txtRight'>You are logged in as $blogUser. &nbsp;&nbsp;  <a href=''>Logout</a></h4>";
+        echo "<h4 class='txtRight'>You are logged in as $blogUser. &nbsp;&nbsp;  <a href='logout.php' class='btnDefault'>Logout</a>&nbsp;&nbsp;<a href='index.php' class='btnDefault'>Home</a></h4>";
         $titleNoTags = strip_tags($article['title']);
         $postedDate = date('M d, Y \a\t H:i:s', strtotime($article['creationTS']));
         $author = $article['username'];

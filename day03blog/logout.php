@@ -3,21 +3,21 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/styles.css?<?php echo time();?>" />
+  <title>Document</title>
 </head>
 
 <body>
-    <div id="centeredContent">
-        <?php
+  <div class=" containterCentered successMsg">
+    <?php
         // session_reset();
         unset($_SESSION['blogUser']);
         ?>
-        <p>You've been logged out. <a href="index.php">Click to continue</a></p>
-    </div>
+    <h4>You've successfully logged out. <br><br><a href="index.php" class="btnDefault">Click to continue</a></h4>
+  </div>
 </body>
 
 </html>
