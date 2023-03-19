@@ -39,7 +39,7 @@
         <!-- Title -->         
         <div class="rowFlex">
           <label for="IdTitle" class="formLabel">Title</label>
-          <input type="text" name="title" id="IdTitle" class="form-control border border-dark" placeholder="Type title here...." value="$title">
+          <input type="text" name="title" id="IdTitle" class="" placeholder="Type title here...." value="$title">
         </div>          
         <!-- content -->
         <div class="rowFlex">            
