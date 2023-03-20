@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 </head>
+
 <body>
-<?php
+  <?php
 // database details
 $dbName="day01";
 $dbUser="day01";
@@ -28,7 +30,7 @@ if (isset($_GET["name"])) {
   $name = $_GET["name"];
   $age = random_int(1,100);  //this will produce a random variable between 1, 100
   // TODO: talk about SQL Injection
-  $sql = sprintf("INSERT INTO friends VALUES (NULL, '%s', '%s')",
+  $sql = sprintf("INSERT INTO friends VALUES (NULL, '%s', '%s')",  //sprintf is same as printf, one difference is it stores values rather than print (to rememeber store print f)
           mysqli_real_escape_string($link, $name), // this is sql injection
           mysqli_real_escape_string($link, $age));
   if (!mysqli_query($link, $sql)) {   // mysli_query($link,$sql) -- is command to transfer data to database, command will execute to test boolean
@@ -38,6 +40,7 @@ if (isset($_GET["name"])) {
 } else {
   echo "<p>Please provide name=... parameter in the URL</p>";
 }
-?>  
+?>
 </body>
+
 </html>

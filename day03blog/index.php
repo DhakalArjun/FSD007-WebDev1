@@ -18,14 +18,16 @@
           $user = $_SESSION['blogUser']['userName'];
           echo "<div>
                   <h4 class='txtRight'>You are logged in as $user.
-                  <a href='logout.php' class='btnDefault'>Logout</a> <a href='articleadd.php' class='btnDefault'>Post article</a></h4>
+                  <a href='logout.php' class='btnDefault'>Logout</a> &nbsp;<a href='articleadd.php' class='btnDefault'>Post article</a></h4>
                 </div>";
         } else {
             echo '<h4 class="txtRight">To post articles and comments <a href="login.php" class="btnDefault">Login</a> or <a href="register.php" class="btnDefault">Register</a></h4>';
         }
         // TODO: implement pagination (maybe)
-        //$sqlStr = "SELECT a.id, a.creationTS, a.title, a.body, u.username FROM articles as a JOIN users as u ON a.authorId = u.id ORDER BY a.id DESC"; // LIMIT 10";
-        $sqlStr = "SELECT a.id, a.creationTS, a.title, a.body, u.username FROM articles as a JOIN users as u ON a.authorId = u.id ORDER BY a.id DESC LIMIT 10";
+        
+        // function loadArticle($con, $limit){        
+        //$sqlStr = "SELECT a.id, a.creationTS, a.title, a.body, u.username FROM articles as a JOIN users as u ON a.authorId = u.id ORDER BY a.id DESC LIMIT $limit";
+        $sqlStr = "SELECT a.id, a.creationTS, a.title, a.body, u.username FROM articles as a JOIN users as u ON a.authorId = u.id ORDER BY a.id DESC "; // LIMIT 10;
         $result = mysqli_query($con, $sqlStr);
         if (!$result) {
             die("SQL Query failed: " . mysqli_error($con));
@@ -44,10 +46,13 @@
                   <p class='indexArticleDetail'>Posted by <strong>$author</strong> on <i>$postedDate</i></p>
                   <p class='indexArticleContent'>$bodyPreview</p>
                 </div>";
-        } 
-        echo "<p class='txtCenter width800'><button onclick='#' type='button' class='btnDefault'>Load More</button/></p>";
-        ?>
-  </div>"
+        }
+      // } 
+
+        // $limit = 10;
+        // loadArticle($con, $limit);      
+        echo "<p class='txtCenter width800'><button onclick='' type='button' class='btnDefault'>Load More</button/></p>";        
+    ?>
 </body>
 
 </html>

@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <link rel="stylesheet" href="css/styles.css?<?php echo time();?>" />
 </head>
-<body>
-<?php
+
+<body class="containterCentered">
+  <?php
   //calling db.php to connect to database
   require_once('db.php');
 
@@ -16,17 +19,20 @@
     $diffArray[$difficultyVal] = 'checked';
     $isDoneChecked=$isDoneVal?'checked':'';
     $todoForm = <<< ANYTEXT
-      <form method="post">    
-        <label for="task">Task:</label><input type="text" name="task" value="$taskVal" />
-        <br />
-        <label for="taskDifficulty">Difficulty:</label>
+      <form method="post" class="formAsContainter width300 txtLeft"> 
+        <div class="rowFlexLeftAlign">
+        <label for="task" class="formLabel">Task:</label><input type="text" name="task" value="$taskVal" />
+        </div>  
+        <div class="rowFlexLeftAlign">
+        <label for="taskDifficulty" class="formLabel">Difficulty:</label>
         <input type="radio" name="taskDifficulty" value="Easy" {$diffArray['Easy']} />Easy
         <input type="radio" name="taskDifficulty" value="Medium" {$diffArray['Medium']} />Medium
         <input type="radio" name="taskDifficulty" value="Hard" {$diffArray['Hard']} />Hard
-        <br />
-        <label for="isDone">IsDone?:</label>
+        </div>  
+        <div class="rowFlexLeftAlign">
+        <label for="isDone" class="formLabel">IsDone?:</label>
         <input type="checkbox" name="isDone" value="1" $isDoneChecked />
-        <br>
+        </div>
         <input type="submit" value="Create task">      
       </form>
     ANYTEXT;
@@ -34,10 +40,10 @@
   }
   if(isset($_POST["task"])){
     // following four lines of code will print list of values for POST method to verify if form is able to collect data. after verification just comment them
-    echo "<pre>\n";
-    echo "$_POST:"."\n";
-    print_r($_POST);
-    echo "</pre>\n";
+    // echo "<pre>\n";
+    // echo "$_POST:"."\n";
+    // print_r($_POST);
+    // echo "</pre>\n";
 
     $task = $_POST["task"];
     $taskDificulty = $_POST["taskDifficulty"];
@@ -61,7 +67,7 @@
         echo "<li>$error</li>";
       }
       echo "</ul>\n";
-      createForm($task);
+      createForm($task, $taskDificulty, $isDone);
     }
     else{
 
@@ -84,8 +90,10 @@
     }
   }
   else {
-    createForm();
+    
+    createForm($taskVal="", $difficultyVal="Easy", $isDoneVal="");
   }
-?>  
+?>
 </body>
+
 </html>

@@ -34,7 +34,7 @@
           <label for="IdDesiredUserName" class="formLabel">Desired username</label>          
           <div class="colFlex">
             <input type="text" name="desiredUserName" id="IdDesiredUserName" class="" value="$user" required>
-            <span id="usernameTaken" class="inline-form-text"></span>
+            <span id="usernameTaken" class=""></span>
           </div>            
         </div>
         <!-- username -->
@@ -123,8 +123,9 @@
         $errors[]="Both passwords must match exactly";
       }
       //email address format check: ^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z]{2,})$
-      if(preg_match('/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z]{2,})$/',$userEmail) != 1){
-        $errors[]="Please verify your email address, it didn't match standard format.";
+      // if(preg_match('/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z]{2,})$/',$userEmail) != 1){
+      if (filter_var($userEmail, FILTER_VALIDATE_EMAIL) === false) {
+        $errors[]="Please verify your email address, it doesn't look valid.";
         $userEmail="";
       }
     

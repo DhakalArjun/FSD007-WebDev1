@@ -43,7 +43,7 @@
         </div>          
         <!-- content -->
         <div class="rowFlex">            
-          <label for="Idcontent" class="formLabel">Content</label>  
+          <label for="Idcontent" class="formLabel" >Content</label>  
           <textarea name="content" id="IdContent" class="" placeholder="Type your content here...." requried>$content</textarea>            
         </div>
         <!-- button and anchor tag to Register--> 

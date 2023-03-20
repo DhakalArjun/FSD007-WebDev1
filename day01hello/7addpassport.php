@@ -103,28 +103,26 @@
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-      crossorigin="anonymous"
-    />
-    <style>
-      .success-message{
-        text-align: center;
-        background-color: green;
-        color:white;        
-        padding: 1rem;        
-      }
-    </style>
-  </head>
-  <body>
-    <?php
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+  <style>
+  .success-message {
+    text-align: center;
+    background-color: green;
+    color: white;
+    padding: 1rem;
+  }
+  </style>
+</head>
+
+<body>
+  <?php
       function printForm($ppNo="")
       { 
         // $ppNo = htmlentities($ppNo); // may need to avoid invalid html in case <>" are part of name - Not understood this line till now - need to work on it     
@@ -190,11 +188,12 @@
         MSG;
         echo $errorMsg;               
       } 
-      ?>   
-  </body>
+      ?>
+</body>
+
 </html>
 
- <!-- Note: (Some rules to follow for the HTML form to upload file)
+<!-- Note: (Some rules to follow for the HTML form to upload file)
 - Make sure that the form uses method="post"
 - The form also needs attribute: enctype="multipart/form-data". It specifies which content-type to use when submitting the form,
   without specifying this, the file upload will not work. 

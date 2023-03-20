@@ -51,7 +51,7 @@
     
       if(!$caseLoginSuccessful){    
         printLoginForm();
-        echo '<h6 class="error-msg">Invalid username or password</h6>';
+        echo '<div class="errorMsg width350"><h4>Invalid username or password !</h4></div>';
       } else {
     
         unset($userDetails['password']); //for security reason erase password element from associative array of user details
