@@ -52,7 +52,7 @@
             <label for="IdPasswordRepeat" class="formLabel">Password (repeat)</label>
             <input type="password" name="passwordRepeat"  id="IdPasswordRepeat" class="" aria-describedby="passwordHelpInline" required>
         </div>
-        <!-- button and anchor tag to Register--> 
+        <!-- button to Register--> 
             <input type="submit" name="register" value="Register !" class="btnDefault moveRight2" >  
       </form> 
       <div class="width400 colFlex registraionNote">
@@ -99,7 +99,7 @@
       //Password must be at least 6 characters long and must contain at least one uppercase letter, one lower case letter, 
       //and one number or special character. It must not be longer than 100 characters. Passwords must match for the user to be created.
       //1. at least one lower case letter
-      if(!mysqli_num_rows($result) and !preg_match('/[a-z]{1,}/',$password)){
+      if(!preg_match('/[a-z]{1,}/',$password)){
         $errors[]="Password must containg at least one lower case letters";
       }
       //2. at least one upper case letter.
@@ -111,7 +111,7 @@
         $errors[]="Password must containg at least one number";
       }
       //4. at least one special character
-      if(!preg_match('/[*@!#%&()^~{}]+/',$password)){
+      if(!preg_match('/[*@!#%&()^~_{}]+/',$password)){
         $errors[]="Password must containg at least one special character";
       }
       //5. length of password must be within 6 to 100 character

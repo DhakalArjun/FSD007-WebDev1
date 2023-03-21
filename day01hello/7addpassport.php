@@ -21,7 +21,7 @@
     $targetFileName = $passportNo.".".$fileFormat;    
     $errors = [];
 
-    // To check passport number condition : [a-zA-Z]{2}[0-9]{6}
+    // To check passport number condition : ^[A-Z]{2}[0-9]{6}$
     if(preg_match('/^[A-Z]{2}[0-9]{6}$/', $passportNo) !=1){
       $errors[]="Passport number should have two uppercase letter followed by exactly 6 numbers, example: AB123456.";
       $passportNo = "";
@@ -48,7 +48,7 @@
 
     //To check file size: 
     $fileSize = $_FILES['ImageToUpload']['size'];  
-    if($fileSize > 2097152){                        // 2 MB = 1048576 bytes * 2 = 2097125 bytes
+    if($fileSize > 2 * 1024 * 1024){                        // 1 MB = 1024 bytes
         $errors[]='Sorry your file is too large, maximum file size is 2 MB';
     }
 

@@ -29,7 +29,7 @@
   <div class="containterCentered">
     <?php    
      if (!isset($_SESSION['blogUser'])) {
-      die("Error: only authenticated users may post an article");
+      die("Error: Only authenticated users can post an article");
     } 
     function printCreateNewArticleForm($blogUser="",$title="",$content="")
     { $addArticle = <<< FORMSTART
@@ -46,7 +46,7 @@
           <label for="Idcontent" class="formLabel" >Content</label>  
           <textarea name="content" id="IdContent" class="" placeholder="Type your content here...." requried>$content</textarea>            
         </div>
-        <!-- button and anchor tag to Register--> 
+        <!-- button to Register--> 
         <input type="submit" name="create" value="Create" class="btnDefault moveRight-3"> 
       </form>
       FORMSTART;
@@ -61,7 +61,7 @@
 
       // FIXME: sanitize body - 1) only allow certain HTML tags, 2) make sure it is valid html
       // WARNING: If you forget to sanitize the body bad things may happen such as JavaScript injection
-      $content = strip_tags($content, "<p><ul><li><em><strong><i><b><ol><h3><h4><h5><span><pre>");
+      $content = strip_tags($content, "<h3><h4><h5><p><span><pre><ul><ol><li><em><strong><i><b>");
       $title = htmlentities($title);
       $errors = [];
     

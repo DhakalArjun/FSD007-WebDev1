@@ -3,7 +3,7 @@
 require_once("db.php");
 
 if(!isset($_GET['username'])){    //here username used by $_GET is a url parameter input  
-    die("Error: user parameter not provided");
+    die("Error: username parameter not provided");
 }
 $username = $_GET['username'];
 $checkSqlStr = sprintf("SELECT * FROM users WHERE userName='%s'",

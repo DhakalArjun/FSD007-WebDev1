@@ -20,11 +20,7 @@
 
 <body>
   <div class="containterCentered width800">
-    <?php        
-     if (!isset($_SESSION['blogUser'])) {
-      die("Error: only authenticated users may post an article");
-      }
-
+    <?php
       function printArticleForm($content="")
       { $addCommentForm = <<< FORMSTART
           <form class="formAsContainter width800" action="" method="post" enctype="multipart/form-data">                
@@ -55,20 +51,33 @@
           http_response_code(404); // may work or not work, depending on whether output buffering is enabled or not
           echo '<h2>Article not found</h2>';
       } else {
-        $blogUser =$_SESSION['blogUser']['userName'];  
-        echo "<h4 class='txtRight'>You are logged in as $blogUser. &nbsp;&nbsp;  <a href='logout.php' class='btnDefault'>Logout</a>&nbsp;&nbsp;<a href='index.php' class='btnDefault'>Home</a></h4>";
-        $titleNoTags = strip_tags($article['title']);
-        $postedDate = date('M d, Y \a\t H:i:s', strtotime($article['creationTS']));
-        $author = $article['username'];
-        $content =$article['body'];
-        echo "<div class='articleSection'>         
-                <h2>$titleNoTags</h2>         
-                <p>Posted by <i>$author</i> on <i>$postedDate</i></p>
-                <div class='articleContent'>$content</div>
-              </div>";
-        // NOT recommended - use Twig (next week)
-        // echo "<script> document.title='" . htmlentities($article['title']) . "'; </script>\n";
-        printArticleForm();
+        if (isset($_SESSION['blogUser'])) {
+          $blogUser =$_SESSION['blogUser']['userName'];  
+          echo "<h4 class='txtRight'>You are logged in as $blogUser. &nbsp;&nbsp;  <a href='logout.php' class='btnDefault'>Logout</a>&nbsp;&nbsp;<a href='index.php' class='btnDefault'>Home</a></h4>";
+          $titleNoTags = strip_tags($article['title']);
+          $postedDate = date('M d, Y \a\t H:i:s', strtotime($article['creationTS']));
+          $author = $article['username'];
+          $content =strip_tags($article['body']);
+          echo "<div class='articleSection'>         
+                  <h2>$titleNoTags</h2>         
+                  <p>Posted by <i>$author</i> on <i>$postedDate</i></p>
+                  <div class='articleContent'>$content</div>
+                </div>";
+          // NOT recommended - use Twig (next week)
+          // echo "<script> document.title='" . htmlentities($article['title']) . "'; </script>\n";
+          printArticleForm();          
+        }else{
+          echo '<h4 class="txtRight">To post articles and comments <a href="login.php" class="btnDefault">Login</a> or <a href="register.php" class="btnDefault">Register</a></h4>';
+          $titleNoTags = strip_tags($article['title']);
+          $postedDate = date('M d, Y \a\t H:i:s', strtotime($article['creationTS']));
+          $author = $article['username'];
+          $content =strip_tags($article['body']);
+          echo "<div class='articleSection'>         
+                  <h2>$titleNoTags</h2>         
+                  <p>Posted by <i>$author</i> on <i>$postedDate</i></p>
+                  <div class='articleContent'>$content</div>
+                </div>";
+        }       
       }
    ?>
   </div>
